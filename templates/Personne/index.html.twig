@@ -3,6 +3,10 @@
     <ul>
     {% for personne in personnes %}
         <li>{{ personne.name }}</li>
+        <li>{{ personne.age }}</li>
+        <li>{{ personne.visible }}</li>
+        <li>{{ personne.createdAt|date }}</li>
+        <br>
     {% endfor %}
     </ul>
 {% endblock %}

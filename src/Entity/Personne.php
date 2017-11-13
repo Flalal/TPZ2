@@ -48,21 +48,40 @@ class Personne
      */
     private $createdAt;
 
+
     /**
-     * Personne constructor.
-     * @param int $id
      * @param string $name
-     * @param int $age
-     * @param bool $visible
-     * @param date $createdAt
      */
-    public function __construct($name, $age, $visible, \DateTime $createdAt)
+    public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @param int $age
+     */
+    public function setAge(int $age)
+    {
         $this->age = $age;
+    }
+
+    /**
+     * @param boolean $visible
+     */
+    public function setVisible(bool $visible)
+    {
         $this->visible = $visible;
+    }
+
+    /**
+     * @param date $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
     }
+
+
 
     /**
      * @return string
@@ -91,7 +110,7 @@ class Personne
     /**
      * @return date
      */
-    public function getCreatedAt(): date
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
