@@ -1,9 +1,8 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <ul>
-    {% for personne in personnes %}
-        <li>{{ personne }}</li>
-
+    {% for intentory in intentorys %}
+        <li>{{ intentory.name }}</li>
         <br>
     {% endfor %}
     </ul>

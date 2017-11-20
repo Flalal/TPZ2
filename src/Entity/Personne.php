@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
@@ -26,95 +27,81 @@ class Personne
      *
      */
     private $name;
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="age", type="integer")
-     *
-     */
-    private $age;
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="visible", type="boolean")
-     *
-     */
-    private $visible;
-    /**
-     * @var date
-     *
-     * @ORM\Column(name="created_at", type="date")
-     *
-     */
-    private $createdAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="max_weight", type="decimal", precision=4, scale=1)
+     *
+     */
+    private $maxWeight;
 
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
     }
 
     /**
-     * @param int $age
+     * @return string
      */
-    public function setAge(int $age)
+    public function getMaxWeight()
     {
-        $this->age = $age;
+        return $this->maxWeight;
     }
 
     /**
-     * @param boolean $visible
+     * @param string $maxWeight
      */
-    public function setVisible(bool $visible)
+    public function setMaxWeight($maxWeight)
     {
-        $this->visible = $visible;
+        $this->maxWeight = $maxWeight;
     }
+
 
     /**
-     * @param date $createdAt
+     * @var Inventory[]
+     * @ORM\OneToMany(targetEntity="Inventory", mappedBy="personne")
      */
-    public function setCreatedAt($createdAt)
+    private $inventories;
+
+
+    public function __construct()
     {
-        $this->createdAt = $createdAt;
+        $this->inventories = new ArrayCollection();
     }
-
-
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @return int
+     * @return Inventory[]
      */
-    public function getAge(): int
+    public function getInventories()
     {
-        return $this->age;
+        return $this->inventories;
     }
 
     /**
-     * @return boolean
+     * @param Inventory[] $inventories
      */
-    public function isVisible(): bool
+    public function setInventories($inventories)
     {
-        return $this->visible;
+        $this->inventories = $inventories;
     }
 
-    /**
-     * @return date
-     */
-    public function getCreatedAt()
+    function __toString()
     {
-        return $this->createdAt;
+        // TODO: Implement __toString() method.
+        return $this->getName() . " " . $this->getMaxWeight() . PHP_EOL;
     }
-
 
 
 }

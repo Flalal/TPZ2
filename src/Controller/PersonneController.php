@@ -22,13 +22,15 @@ class PersonneController extends Controller
      */
     function new(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();/*
         //$p = new Personne("Flo", 21, true, new \DateTime("now"));
         $personne = new Personne();
         $personne->setName("Flo");
         $personne->setAge(21);
         $personne->setCreatedAt(new \DateTime("now"));
-        $personne->setVisible(true);
+        $personne->setVisible(true);*/
+
         /*
                 $em->persist($p);
                 $em->flush();
@@ -47,7 +49,7 @@ class PersonneController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $entity = $form->getData();
-            $em->persist($entity);
+            $em->persist($personne);
             $em->flush();
         }
 
@@ -55,7 +57,7 @@ class PersonneController extends Controller
     }
 
     /**
-     * @Route("/personne/index", name="app_personnecontroller_index")
+     * @Route("/personne", name="app_personnecontroller_index")
      */
     function index()
     {

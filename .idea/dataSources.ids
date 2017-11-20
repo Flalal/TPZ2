@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - florianflahaut@ipabdd.iut-lens.univ-artois.fr" uuid="9b22615f-16be-4ef8-b74f-444e06d1a2fe">
+    <database-info product="MySQL" version="5.5.5-10.1.14-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+      <schema id="1" name="florianflahaut">
+        <visible>1</visible>
+      </schema>
+      <schema id="2" name="florianflahaut1"/>
+      <schema id="3" name="florianflahaut2"/>
+      <schema id="4" name="information_schema"/>
+      <table id="5" parent="1" name="inventory"/>
+      <table id="6" parent="1" name="materials"/>
+      <table id="7" parent="1" name="personnes"/>
+      <column id="8" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="9" parent="5" name="personne_id">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="10" parent="5" name="material_id">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="11" parent="5" name="number_of_item">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <index id="12" parent="5" name="IDX_B12D4A36A21BD112">
+        <columns>personne_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="13" parent="5" name="IDX_B12D4A36E308AC6F">
+        <columns>material_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="14" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="15" parent="5" name="FK_B12D4A36A21BD112">
+        <columns>personne_id</columns>
+        <ref-key>~.personnes.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="16" parent="5" name="FK_B12D4A36E308AC6F">
+        <columns>material_id</columns>
+        <ref-key>~.materials.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="17" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="18" parent="6" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="19" parent="6" name="weight">
+        <mandatory>1</mandatory>
+        <data-type>decimal(2,1)|0</data-type>
+      </column>
+      <key id="20" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="21" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="22" parent="7" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="23" parent="7" name="max_weight">
+        <mandatory>1</mandatory>
+        <data-type>decimal(4,1)|0</data-type>
+      </column>
+      <key id="24" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+  <data-source name="MySQL - florianflahaut1@ipabdd.iut-lens.univ-artois.fr" uuid="17cde521-480c-4cf0-b013-26d4a3c6aad2">
+    <database-info product="MySQL" version="5.5.5-10.1.14-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+      <schema id="1" name="florianflahaut1">
+        <visible>1</visible>
+      </schema>
+      <schema id="2" name="florianflahaut"/>
+      <schema id="3" name="florianflahaut2"/>
+      <schema id="4" name="information_schema"/>
+    </database-model>
+  </data-source>
+</component>

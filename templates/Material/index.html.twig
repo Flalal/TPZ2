@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <ul>
+    {% for material in materials %}
+        <li>{{ material }}</li>
+        <br>
+    {% endfor %}
+    </ul>
+
+    {% for message in app.flashes('nice') %}
+        {{ message }}
+        {% endfor %}
+{% endblock %}
