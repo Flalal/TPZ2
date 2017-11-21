@@ -1,11 +1,4 @@
-{% extends "base.html.twig" %}
-{% block body %}
-    <ul>
-    {% for personne in personnes %}
-        <li>ID : {{ personne.id }}</li>
-        <li>NAME : {{ personne.name }}</li>
-        <br>
-        <a href="{{ path('app_personne_edit', {'id': personne.id}) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a>
-    {% endfor %}
-    </ul>
-{% endblock %}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+

@@ -80,13 +80,23 @@ class PersonneController extends Controller
     }
 
     /**
-     * @Route("/personne/edit", name="app_personne_edit")
+     * @Route("/personne/edit/{id}", name="app_personne_edit")
      */
-    function edit()
+    function edit(Request $request, Personne $personne)
     {
         $em = $this->getDoctrine()->getManager();
-        $personnes = $em->getRepository(Personne::class)->findAll();
-        return $this->render("Personne/edit.html.twig", ["personnes" => $personnes]);
+        $form = $this->createForm(PersonneType::class, $personne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->container->get('session')->getFlashBag()->add("success_personne", "Personne edit");
+            $router = $this->container->get('router');
+            $url = $router->generate('app_personne_index');
+            return new RedirectResponse($url, $status = 302);
+        } else {
+            $this->container->get('session')->getFlashBag()->add("error_personne", "Personne non edit");
+        }
+        return $this->render("Personne/edit.html.twig", ['form' => $form->createView(),]);
     }
 
 }
