@@ -72,13 +72,22 @@ class InventoryController extends Controller
     }
 
     /**
-     * @Route("/inventory/edit", name="app_inventory_edit")
+     * @Route("/inventory/edit/{id}", name="app_inventory_edit")
      */
-    function edit()
+    function edit(Request $request, Inventory $inventory)
     {
         $em = $this->getDoctrine()->getManager();
-        $inventory = $em->getRepository(Inventory::class)->findAll();
-        return $this->render("Inventory/edit.html.twig", ["inventories" => $inventory]);
-
+        $form = $this->createForm(InventoryType::class, $inventory);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->container->get('session')->getFlashBag()->add("success_inventory", "inventory edit");
+            $router = $this->container->get('router');
+            $url = $router->generate('app_inventory_index');
+            return new RedirectResponse($url, $status = 302);
+        } else {
+            $this->container->get('session')->getFlashBag()->add("error_inventory", "inventory non edit");
+        }
+        return $this->render("Inventory/edit.html.twig", ['form' => $form->createView(),]);
     }
 }
