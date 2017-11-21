@@ -84,4 +84,14 @@ class MaterialController extends Controller
         }
         return $this->render("Material/edit.html.twig", ['form' => $form->createView(),]);
     }
+
+    /**
+     * @Route("/material/delete/{id}", name="app_material_delete")
+     */
+    public function deleteUserAction(Material $material)
+    {
+        $this->getDoctrine()->getManager()->remove($material);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('app_material_index');
+    }
 }

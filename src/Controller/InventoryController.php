@@ -90,4 +90,14 @@ class InventoryController extends Controller
         }
         return $this->render("Inventory/edit.html.twig", ['form' => $form->createView(),]);
     }
+
+    /**
+     * @Route("/inventory/delete/{id}", name="app_inventory_delete")
+     */
+    public function deleteUserAction(Inventory $inventory)
+    {
+        $this->getDoctrine()->getManager()->remove($inventory);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('app_inventory_index');
+    }
 }
