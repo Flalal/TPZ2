@@ -66,13 +66,22 @@ class MaterialController extends Controller
     }
 
     /**
-     * @Route("/material/edit", name="app_material_edit")
+     * @Route("/material/edit/{id}", name="app_material_edit")
      */
-    function edit()
+    function edit(Request $request, Material $material)
     {
         $em = $this->getDoctrine()->getManager();
-        $materials = $em->getRepository(Material::class)->findAll();
-        return $this->render("Material/edit.html.twig", ["materials" => $materials]);
-
+        $form = $this->createForm(MaterialType::class, $material);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->container->get('session')->getFlashBag()->add("success_material", "material edit");
+            $router = $this->container->get('router');
+            $url = $router->generate('app_material_index');
+            return new RedirectResponse($url, $status = 302);
+        } else {
+            $this->container->get('session')->getFlashBag()->add("error_material", "material non edit");
+        }
+        return $this->render("Material/edit.html.twig", ['form' => $form->createView(),]);
     }
 }
