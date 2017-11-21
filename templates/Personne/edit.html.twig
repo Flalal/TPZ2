@@ -2,11 +2,10 @@
 {% block body %}
     <ul>
     {% for personne in personnes %}
-        <li>{{ personne.name }}</li>
-        <li>{{ personne.age }}</li>
-        <li>{{ personne.visible }}</li>
-        <li>{{ personne.createdAt|date }}</li>
+        <li>ID : {{ personne.id }}</li>
+        <li>NAME : {{ personne.name }}</li>
         <br>
+        <a href="{{ path('app_personne_edit', {'id': personne.id}) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a>
     {% endfor %}
     </ul>
 {% endblock %}

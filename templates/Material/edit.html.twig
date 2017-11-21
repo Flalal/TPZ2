@@ -1,11 +1,9 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <ul>
-    {% for personne in personnes %}
-        <li>{{ personne.name }}</li>
-        <li>{{ personne.age }}</li>
-        <li>{{ personne.visible }}</li>
-        <li>{{ personne.createdAt|date }}</li>
+    {% for material in materials %}
+        <li>ID : {{ material.id }}</li>
+        <li>NAME : {{ material.name }}</li>
         <br>
     {% endfor %}
     </ul>

@@ -87,7 +87,6 @@ class PersonneController extends Controller
         $em = $this->getDoctrine()->getManager();
         $personnes = $em->getRepository(Personne::class)->findAll();
         return $this->render("Personne/edit.html.twig", ["personnes" => $personnes]);
-
     }
 
 }

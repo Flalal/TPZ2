@@ -1,10 +1,11 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <ul>
-    {% for inventory in inventories %}
-        <li>{{ inventory.personne }}</li>
-        <li>{{ inventory.material }}</li>
-        <li>{{ inventory.numberOfItem }}</li>
+        {% for inventory in inventories %}
+            <li>ID : {{ inventory.id }}</li>
+            <li>PERSONNE : {{ inventory.personne }}</li>
+            <li>MATERIAL : {{ inventory.material }}</li>
+            <li>NUMBER OF ITEMS : {{ inventory.numberOfItem }}</li>
         <br>
     {% endfor %}
     </ul>
