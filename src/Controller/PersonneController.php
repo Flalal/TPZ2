@@ -99,4 +99,15 @@ class PersonneController extends Controller
         return $this->render("Personne/edit.html.twig", ['form' => $form->createView(),]);
     }
 
+
+    /**
+     * @Route("/personne/delete/{id}", name="app_personne_delete")
+     */
+    public function deleteUserAction(Personne $personne)
+    {
+        $this->getDoctrine()->getManager()->remove($personne);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('app_personne_index');
+    }
+
 }

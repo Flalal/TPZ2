@@ -3,6 +3,8 @@
     <ul>
     {% for material in materials %}
         <li>TO STRING MATERIAL : {{ material }}</li>
+
+        <a href="{{ path( 'app_material_edit', {'id' : material.id }) }}">Edit</a>
         <br>
     {% endfor %}
     </ul>

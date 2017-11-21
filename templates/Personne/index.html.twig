@@ -4,6 +4,10 @@
     {% for personne in personnes %}
         <li>TO STRING PERSONNE : {{ personne }}</li>
 
+        <a href="{{ path( 'app_personne_edit', {'id' : personne.id }) }}">Edit</a>
+
+        <a href="{{ path( 'app_personne_delete', {'id' : personne.id }) }}">Delete</a>
+
         <br>
     {% endfor %}
     </ul>
