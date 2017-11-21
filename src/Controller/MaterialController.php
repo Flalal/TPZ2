@@ -38,11 +38,15 @@ class MaterialController extends Controller
             $em->flush();
 
 
-          //  $this->container->get('session')->getFlashBag()->add("nice","teste");
+            $this->container->get('session')->getFlashBag()->add("success_material","Material add");
 
             $router = $this->container->get('router');
             $url = $router->generate('app_material_index');
             return new RedirectResponse($url,$status=302);
+        }
+        else{
+            $this->container->get('session')->getFlashBag()->add("error_material","Material non add");
+
         }
 
         return $this->render("Material/new.html.twig", ['form' => $form->createView(),]);

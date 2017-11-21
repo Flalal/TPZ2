@@ -8,4 +8,11 @@
         <br>
     {% endfor %}
     </ul>
+
+    {% for message in app.flashes('success_inventory') %}
+        {{ message }}
+    {% endfor %}
+    {% for message in app.flashes('error_inventory') %}
+        {{ message }}
+    {% endfor %}
 {% endblock %}

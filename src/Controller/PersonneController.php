@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Serialization\Person;
 
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,13 +52,24 @@ class PersonneController extends Controller
             $entity = $form->getData();
             $em->persist($personne);
             $em->flush();
+
+
+            $this->container->get('session')->getFlashBag()->add("success_personne","Personne add");
+
+            $router = $this->container->get('router');
+            $url = $router->generate('app_personne_index');
+            return new RedirectResponse($url,$status=302);
+        }
+        else{
+            $this->container->get('session')->getFlashBag()->add("error_personne","Personne non add");
+
         }
 
         return $this->render("Personne/new.html.twig", ['form' => $form->createView(),]);
     }
 
     /**
-     * @Route("/personne", name="app_personnecontroller_index")
+     * @Route("/personne", name="app_personne_index")
      */
     function index()
     {
@@ -68,7 +80,7 @@ class PersonneController extends Controller
     }
 
     /**
-     * @Route("/personne/edit", name="app_personnecontroller_edit")
+     * @Route("/personne/edit", name="app_personne_edit")
      */
     function edit()
     {

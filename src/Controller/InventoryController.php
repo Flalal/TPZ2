@@ -43,15 +43,18 @@ class InventoryController extends Controller
             if($calcul->calcul()){
                 $em->persist($entity);
                 $em->flush();
-                $this->container->get('session')->getFlashBag()->add("success","L'invotory a été crée");
+                $this->container->get('session')->getFlashBag()->add("success__inventory","L'invotory a été crée");
 
             }
             else{
-                $this->container->get('session')->getFlashBag()->add("arror","TROP LOURD");
+                $this->container->get('session')->getFlashBag()->add("error__inventory","TROP LOURD");
 
             }
 
 
+            $router = $this->container->get('router');
+            $url = $router->generate('app_inventory_index');
+            return new RedirectResponse($url,$status=302);
 
         }
         return $this->render("Inventory/new.html.twig", ['form' => $form->createView(),]);

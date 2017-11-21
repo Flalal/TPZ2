@@ -7,7 +7,10 @@
     {% endfor %}
     </ul>
 
-    {% for message in app.flashes('nice') %}
+    {% for message in app.flashes('success_material') %}
         {{ message }}
         {% endfor %}
+    {% for message in app.flashes('error_material') %}
+        {{ message }}
+    {% endfor %}
 {% endblock %}
