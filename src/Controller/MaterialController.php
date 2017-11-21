@@ -88,7 +88,7 @@ class MaterialController extends Controller
     /**
      * @Route("/material/delete/{id}", name="app_material_delete")
      */
-    public function deleteUserAction(Material $material)
+    public function deleteMaterialAction(Material $material)
     {
         $this->getDoctrine()->getManager()->remove($material);
         $this->getDoctrine()->getManager()->flush();

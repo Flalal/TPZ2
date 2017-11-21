@@ -94,7 +94,7 @@ class InventoryController extends Controller
     /**
      * @Route("/inventory/delete/{id}", name="app_inventory_delete")
      */
-    public function deleteUserAction(Inventory $inventory)
+    public function deleteInventoryAction(Inventory $inventory)
     {
         $this->getDoctrine()->getManager()->remove($inventory);
         $this->getDoctrine()->getManager()->flush();

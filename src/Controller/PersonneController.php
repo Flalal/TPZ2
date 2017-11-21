@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Serialization\Person;
 
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,7 +104,7 @@ class PersonneController extends Controller
     /**
      * @Route("/personne/delete/{id}", name="app_personne_delete")
      */
-    public function deleteUserAction(Personne $personne)
+    public function deletePersonneAction(Personne $personne)
     {
         $this->getDoctrine()->getManager()->remove($personne);
         $this->getDoctrine()->getManager()->flush();
