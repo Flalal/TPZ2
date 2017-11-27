@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
- * @ORM\Table(name="materials")
+ * @ORM\Table(name="players")
  */
-class Material
+class Player
 {
+
     /**
      * @var int
      *
@@ -25,13 +27,12 @@ class Material
      *
      */
     private $name;
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="weight", type="decimal", precision=2, scale=1)
-     *
-     */
-    private $weight;
+
+    function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->getId() . " " . $this->getName();
+    }
 
     /**
      * @return int
@@ -41,7 +42,13 @@ class Material
         return $this->id;
     }
 
-
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return string
@@ -57,28 +64,6 @@ class Material
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return float
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * @param float $weight
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = $weight;
-    }
-
-    function __toString()
-    {
-        // TODO: Implement __toString() method.
-        return $this->getName() . " " . $this->getWeight();
     }
 
 
