@@ -39,6 +39,7 @@ class PlayerController extends Controller
             $em->flush();
 
 
+
             $this->container->get('session')->getFlashBag()->add("success_player", "Player add");
 
             $router = $this->container->get('router');

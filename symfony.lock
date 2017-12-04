@@ -26,9 +26,6 @@
             "ref": "e7bbddb8dd603b2c3770cb10f163e692b4b414aa"
         }
     },
-    "symfony/stopwatch": {
-        "version": "v3.3.11"
-    },
     "symfony/routing": {
         "version": "3.3",
         "recipe": {
@@ -64,9 +61,6 @@
     },
     "symfony/class-loader": {
         "version": "v3.3.11"
-    },
-    "symfony/polyfill-apcu": {
-        "version": "v1.6.0"
     },
     "psr/simple-cache": {
         "version": "1.0.0"
@@ -187,12 +181,6 @@
     },
     "symfony/inflector": {
         "version": "v3.3.11"
-    },
-    "paragonie/random_compat": {
-        "version": "v2.0.11"
-    },
-    "symfony/polyfill-php70": {
-        "version": "v1.6.0"
     },
     "symfony/property-access": {
         "version": "v3.3.11"
