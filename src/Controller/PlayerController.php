@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Personne;
 
 use App\Entity\Player;
-use App\Entity\PlayerItem;
-use App\Form\PersonneType;
+use App\Event\AppEvent;
 use App\Form\PlayerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Serialization\Person;
@@ -18,27 +16,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * Class PlayerController
+ * @package App\Controller
+ * @Route("/player")
+ */
 class PlayerController extends Controller
 {
 
     /**
-     * @Route("/player/new", name="app_player_new")
+     * @Route("/new", name="app_player_new")
      */
     function new(Request $request)
     {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $player = new Player();
+        $player = $this->get(\App\Entity\Player::class);
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
-            $entity = $form->getData();
-            $em->persist($player);
-            $em->flush();
 
+            $playerEvent = $this->get(\App\Event\PlayerEvent::class);
+            $playerEvent->setPlayer($player);
 
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(AppEvent::PLAYER_ADD, $playerEvent);
 
             $this->container->get('session')->getFlashBag()->add("success_player", "Player add");
 
@@ -55,7 +56,7 @@ class PlayerController extends Controller
     }
 
     /**
-     * @Route("/player", name="app_player_index")
+     * @Route("/", name="app_player_index")
      */
     function index()
     {
@@ -66,15 +67,26 @@ class PlayerController extends Controller
     }
 
     /**
-     * @Route("/player/edit/{id}", name="app_player_edit")
+     * @Route("/edit/{id}", name="app_player_edit")
      */
     function edit(Request $request, Player $player)
     {
-        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+
+            $player = $form->getData();
+
+            $playerEvent = $this->get(\App\Event\PlayerEvent::class);
+            $playerEvent->setPlayer($player);
+            $playerEvent->setMoney($form->get('money'));
+            $playerEvent->setExperience($form->get('experience'));
+
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(AppEvent::PLAYER_EDIT, $playerEvent);
+
+
             $this->container->get('session')->getFlashBag()->add("success_player", "player edit");
             $router = $this->container->get('router');
             $url = $router->generate('app_player_index');

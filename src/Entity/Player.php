@@ -38,28 +38,41 @@ class Player
      * @Assert\NotBlank()
      */
     private $name;
-    /**
-     * @var integer
-     *
-     * @Assert\NotBlank()
-     * @ORM\Column(type="integer")
-     * @Assert\Range(
-     *      min = 18,
-     *      max = 99,
-     *      minMessage = "Min age : {{ limit }}",
-     *      maxMessage = "Max age : { limit }}"
-     * )
-     */
-    private $age;
 
     /**
      * @var string
      *
      * @ORM\Column()
      * @Assert\NotBlank()
-     * @Assert\Choice({"France", "Belgique"})
+     * @Assert\Choice({"ADC", "JUNG", "TOP", "MID", "SUP"})
      */
-    private $country;
+    private $roles;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $money;
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $experience;
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $updateAt;
+
+    /**
+     * Player constructor.
+     * @param \DateTime $createdAt
+     */
 
 
 
@@ -96,35 +109,83 @@ class Player
     }
 
     /**
-     * @return int
-     */
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-    /**
-     * @param int $age
-     */
-    public function setAge($age)
-    {
-        $this->age = $age;
-    }
-
-    /**
      * @return string
      */
-    public function getCountry()
+    public function getRoles()
     {
-        return $this->country;
+        return $this->roles;
     }
 
     /**
-     * @param string $country
+     * @param string $roles
      */
-    public function setCountry($country)
+    public function setRoles($roles)
     {
-        $this->country = $country;
+        $this->roles = $roles;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMoney()
+    {
+        return $this->money;
+    }
+
+    /**
+     * @param int $money
+     */
+    public function setMoney($money)
+    {
+        $this->money = $money;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * @param int $experience
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
+    }
+
+    /**
+     * @param \DateTime $updateAt
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
     }
 
 
@@ -133,7 +194,7 @@ class Player
     function __toString()
     {
         // TODO: Implement __toString() method.
-        return $this->getId() . " " . $this->getName() . " " . $this->age . " " . $this->getCountry();
+        return "Nom : " . $this->getName() . PHP_EOL . "|||||| Role : " . $this->getRoles() . " ||||| Money : " . $this->getMoney() ;
     }
 
 

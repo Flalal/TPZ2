@@ -27,14 +27,34 @@ class PlayerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name')
-            ->add('age')
-            ->add('country')
-            ->a
-            ->add('save', SubmitType::class, array('label' => 'Créer'))
+            ->add('roles')
+            ->addEventListener( FormEvents::PRE_SET_DATA,
+                array($this, 'onPreSetData') )
             ->getForm();
     }
 
+    public function onPreSetData(FormEvent $event){
+        $player = $event->getData();
+        $form = $event->getForm();
 
+        if ($player->getId() !== null){
+            $form->remove('name');
+            $form->add('money',
+                null,
+                [
+                    'mapped' => false
+                ]
+                );
+            $form->add('experience',
+                null,
+                [
+                    'mapped' => false,
+                ]
+                );
+        }
+
+        $form->add('save', SubmitType::class, array('label' => 'Créer'));
+    }
 
 
 

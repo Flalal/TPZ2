@@ -33,3 +33,9 @@ services:
         arguments: ['%nb_item%']
         public: true
         autowire: false
+
+    App\Entity\Player:
+        public: true
+
+    App\Event\PlayerEvent:
+        public: true
